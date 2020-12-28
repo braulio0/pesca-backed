@@ -1,16 +1,17 @@
 const db = require('./../models');
-const Solicitate = db.Solicitate;
+const Clubs = db.Clubs;
 
 exports.create = async ( req, res ) => {
-	const solicitate = {
+	const clubs = {
 	  name: req.body.name,
     address:req.body.address,
     phone: req.body.phone,
-    RFC: req.body.RFC.toUpperCase(),
-    CURP: req.body.CURP.toUpperCase(),
     zipCode: req.body.zipCode,
+		state: req.body.state,
+		districts:req.body.districts,
+		businessHours: req.body.businessHours,
 	};
-	Solicitate.create(solicitate)
+	Clubs.create(clubs)
 		.then(data => {
 			res.send(data);
 		})
