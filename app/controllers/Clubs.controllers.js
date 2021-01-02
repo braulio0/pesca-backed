@@ -91,13 +91,13 @@ exports.delete = async(req, res) => {
       } else {
         res.send({
 
-          message: `Cannot delete Club with name=${name}. Maybe Tutorial was not found!`
+          message: `Cannot delete Club with name=${name}. Maybe Club was not found!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Tutorial with name=" + name
+        message: "Could not delete Club with name=" + name
       });
     });
 };
