@@ -16,11 +16,11 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // make db
-db.sequelize.sync({ force: true }).then(() => {
-console.log("Drop and re-sync db.");
-});
+//db.sequelize.sync({ force: true }).then(() => {
+//console.log("Drop and re-sync db.");
+//});
 // conect db
-//db.sequelize.sync();
+db.sequelize.sync();
 app.use('/solicitante', solicitante);
 //simple route
 app.get('/', (req, res) => {
