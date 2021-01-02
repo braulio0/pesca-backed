@@ -1,16 +1,22 @@
 const db = require('./../models');
-const Office = db.Office;
+const Solicitante = db.Solicitate;
 
 exports.create = async ( req, res ) => {
-	const solicitate = {
+	const solicitante = {
 	  name: req.body.name,
     address:req.body.address,
     phone: req.body.phone,
     RFC: req.body.RFC.toUpperCase(),
     CURP: req.body.CURP.toUpperCase(),
     zipCode: req.body.zipCode,
+    country:req.body.country,
+    email: req.body.email,
+    licenseFishing: req.body.licenseFishing,
+    Originstate:req.body.Originstate,
+    fishing: req.body.fishing,
+
 	};
-	Solicitate.create(solicitate)
+	Solicitante.create(solicitante)
 		.then(data => {
 			res.send(data);
 		})
@@ -23,10 +29,10 @@ exports.create = async ( req, res ) => {
 		});
 };
 exports.findAll = async (req, res) => {
-  const name = req.query.name;
-  var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
+  const email = req.query.email;
+  var condition = email ? { name: { [Op.iLike]: `%${email}%` } } : null;
 
-  Solicitate.findAll({ where: condition })
+  Solicitante.findAll({ where: condition })
     .then(data => {
       res.send(data);
     })
@@ -39,9 +45,9 @@ exports.findAll = async (req, res) => {
 };
 
 exports.findOne = async (req, res) => {
-  const name = req.params.name;
+  const email = req.params.email;
 
-  Solicitate.findByPk(name)
+  Solicitante.findByPk(email)
     .then(data => {
       res.send(data);
     })
@@ -53,10 +59,11 @@ exports.findOne = async (req, res) => {
 };
 
 exports.update = async(req, res) => {
-  const name = req.params.name;
+  const email = req.params.email;
 
-  Solicitate.update(req.body, {
-    where: { name: name }
+  Solicitante.update(req.body, {
+
+    where: { email: email }
   })
     .then(num => {
       if (num == 1) {
@@ -65,22 +72,22 @@ exports.update = async(req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot update Solicitante with Name=${name}. Maybe Solicitante was not found or req.body is empty!`
+          message: `Cannot update Solicitante with email=${email}. Maybe Solicitante was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Club with name=" + name
+        message: "Error updating Club with email=" + email
       });
     });
 };
 
 exports.delete = async(req, res) => {
-  const name = req.body.name;
-  Solicitate.destroy({
+  const email = req.body.email;
+  Solicitante.destroy({
 
-    where: { name: name }
+    where: { email: email }
   })
     .then(num => {
       if (num == 1) {
@@ -90,19 +97,19 @@ exports.delete = async(req, res) => {
       } else {
         res.send({
 
-          message: `Cannot delete Solicitante with name=${name}. Maybe Solicitante was not found!`
+          message: `Cannot delete Solicitante with email=${email}. Maybe Solicitante was not found!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Solicitante  with name=" + name
+        message: "Could not delete Solicitante  with email=" + email
       });
     });
 };
 
 exports.deleteAll = async(req, res) => {
-  Solicitate.destroy({
+  Solicitante.destroy({
     where: {},
     truncate: false
   })
