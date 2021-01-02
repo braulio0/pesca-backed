@@ -4,6 +4,7 @@ const cors = require('cors');
 const db = require('./app/models')
 const solicitante = require('./app/routers/Solicitantes.router.js');
 const clubs = require('./app/routers/Clubs.router.js');
+const office = require('./app/routers/Office.router.js')
 const app = express();
 
 
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 db.sequelize.sync();
 app.use('/solicitante', solicitante);
 app.use('/clubs', clubs);
+app.use('/office', office );
 //simple route
 app.get('/', (req, res) => {
 
