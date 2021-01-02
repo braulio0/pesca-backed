@@ -2,22 +2,23 @@ const db = require('./../models');
 const Office = db.Office;
 
 exports.create = async ( req, res ) => {
-	const solicitate = {
+	const office = {
 	  name: req.body.name,
     address:req.body.address,
     phone: req.body.phone,
-    RFC: req.body.RFC.toUpperCase(),
-    CURP: req.body.CURP.toUpperCase(),
     zipCode: req.body.zipCode,
+		state: req.body.state,
+		districts:req.body.districts,
+		businessHours: req.body.businessHours,
 	};
-	Solicitate.create(solicitate)
+	Office.create(office)
 		.then(data => {
 			res.send(data);
 		})
 		.catch(err => {
 			res.status(500).send({
 				message: 
-				err.message || " Some erros ocurred while creating Solicitante"
+				err.message || " Some erros ocurred while creating office"
 			}
 			);
 		});
@@ -26,14 +27,14 @@ exports.findAll = async (req, res) => {
   const name = req.query.name;
   var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
 
-  Solicitate.findAll({ where: condition })
+  Office.findAll({ where: condition })
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving Solicitante."
+          err.message || "Some error occurred while retrieving office."
       });
     });
 };
@@ -41,13 +42,13 @@ exports.findAll = async (req, res) => {
 exports.findOne = async (req, res) => {
   const name = req.params.name;
 
-  Solicitate.findByPk(name)
+  Office.findByPk(name)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Solicitante with id=" + name
+        message: "Error retrieving Office with id=" + name
       });
     });
 };
@@ -55,64 +56,64 @@ exports.findOne = async (req, res) => {
 exports.update = async(req, res) => {
   const name = req.params.name;
 
-  Solicitate.update(req.body, {
+  Office.update(req.body, {
     where: { name: name }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Solicitante was updated successfully."
+          message: "Office was updated successfully."
         });
       } else {
         res.send({
-          message: `Cannot update Solicitante with Name=${name}. Maybe Solicitante was not found or req.body is empty!`
+          message: `Cannot update Office with Name=${name}. Maybe Office was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Club with name=" + name
+        message: "Error updating Office with name=" + name
       });
     });
 };
 
 exports.delete = async(req, res) => {
   const name = req.body.name;
-  Solicitate.destroy({
+  Office.destroy({
 
     where: { name: name }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Solicitante was deleted successfully!"
+          message: "Office was deleted successfully!"
         });
       } else {
         res.send({
 
-          message: `Cannot delete Solicitante with name=${name}. Maybe Solicitante was not found!`
+          message: `Cannot delete Office with name=${name}. Maybe Office was not found!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Solicitante  with name=" + name
+        message: "Could not delete Office with name=" + name
       });
     });
 };
 
 exports.deleteAll = async(req, res) => {
-  Solicitate.destroy({
+ Office.destroy({
     where: {},
     truncate: false
   })
     .then(nums => {
-      res.send({ message: `${nums} Solicitantes were deleted successfully!` });
+      res.send({ message: `${nums} Offices were deleted successfully!` });
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all Solicitantes."
+          err.message || "Some error occurred while removing all offices."
       });
     });
 };
