@@ -8,7 +8,7 @@ module.exports = ( sequelize, Sequelize ) => {
       type: Sequelize.STRING,
     },
     phone:{
-      type: Sequelize.INTEGER,
+      type: Sequelize.DOUBLE,
     },
     zipCode:{
       type: Sequelize.INTEGER,

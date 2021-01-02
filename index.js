@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./app/models')
 const solicitante = require('./app/routers/Solicitantes.router.js');
+const clubs = require('./app/routers/Clubs.router.js');
 const app = express();
+
 
 
 var corsOptions = {
@@ -22,6 +24,7 @@ app.use(bodyParser.json());
 // conect db
 db.sequelize.sync();
 app.use('/solicitante', solicitante);
+app.use('/clubs', clubs);
 //simple route
 app.get('/', (req, res) => {
 

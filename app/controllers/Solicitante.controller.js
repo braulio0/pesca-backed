@@ -47,7 +47,7 @@ exports.findAll = async (req, res) => {
 exports.findOne = async (req, res) => {
   const email = req.params.email;
 
-  Solicitante.findByPk(email)
+  Solicitante.findOne({where: {email: email}})
     .then(data => {
       res.send(data);
     })
@@ -78,7 +78,7 @@ exports.update = async(req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Club with email=" + email
+        message: "Error updating solicitante with email=" + email
       });
     });
 };

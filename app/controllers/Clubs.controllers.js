@@ -1,5 +1,5 @@
 const db = require('./../models');
-const Clubs = db.Clubs;
+const Clubs = db.Club;
 
 exports.create = async ( req, res ) => {
 	const clubs = {
