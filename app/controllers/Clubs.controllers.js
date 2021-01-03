@@ -18,7 +18,7 @@ exports.create = async ( req, res ) => {
 		.catch(err => {
 			res.status(500).send({
 				message: 
-				err.message || " Some erros ocurred while creating club"
+				err.message || " Some errors ocurred while creating club"
 			}
 			);
 		});
@@ -34,7 +34,7 @@ exports.findAll = async (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving CLubs."
+          err.message || "Some errors occurred while retrieving Clubs."
       });
     });
 };
@@ -48,7 +48,7 @@ exports.findOne = async (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Tutorial with id=" + name
+        message: "Error retrieving club with id=" + name
       });
     });
 };
