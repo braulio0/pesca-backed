@@ -43,6 +43,9 @@ module.exports = ( sequelize, Sequelize ) => {
     amount:{
       type: Sequelize.INTEGER,
     },
+    status:{
+      type: Sequelize.STRING,
+    },
   });
   return Solicitante;
 };

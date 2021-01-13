@@ -14,6 +14,7 @@ exports.create = async (req, res) => {
     licenseFishing: req.body.licenseFishing,
     Originstate: req.body.Originstate,
     fishing: req.body.fishing,
+    status: "PENDING",
   };
   Solicitante.create(solicitante)
     .then((data) => {
