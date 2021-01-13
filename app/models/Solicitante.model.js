@@ -7,7 +7,7 @@ module.exports = ( sequelize, Sequelize ) => {
       type: Sequelize.STRING,
     },
     phone:{
-      type: Sequelize.DOUBLE,
+      type: Sequelize.STRING,
     },
     RFC:{
       type: Sequelize.STRING
@@ -17,7 +17,7 @@ module.exports = ( sequelize, Sequelize ) => {
       primaryKey:true,
     },
     zipCode:{
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
     },
     country:{
       type: Sequelize.STRING,
