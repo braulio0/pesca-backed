@@ -3,7 +3,7 @@ const Solicitante = db.Solicitate;
 
 exports.create = async (req, res) => {
   const solicitante = {
-    name: req.body.name,
+    Username: req.body.Username,
     address: req.body.address,
     phone: req.body.phone,
     RFC: req.body.RFC,
@@ -15,7 +15,9 @@ exports.create = async (req, res) => {
     Originstate: req.body.Originstate,
     fishing: req.body.fishing,
     status: "PENDING",
+    clubName: req.body.clubName,
   };
+
   Solicitante.create(solicitante)
     .then((data) => {
       res.send(data);

@@ -24,4 +24,11 @@ db.Solicitate = require("./Solicitante.model.js")(sequelize, Sequelize);
 db.Office = require("./office.model.js")(sequelize, Sequelize);
 db.Club = require("./Club.model.js")(sequelize, Sequelize);
 
+db.Club.hasMany(db.Solicitate, { as: "Solicitates" });
+db.Solicitate.belongsTo(db.Club, {
+  foreingKey: "name",
+  as: "Clubs",
+});
+
+
 module.exports = db;

@@ -1,5 +1,6 @@
 const db = require('./../models');
 const Clubs = db.Club;
+const Op = db.Sequelize.Op;
 
 exports.create = async ( req, res ) => {
 	const clubs = {
@@ -23,11 +24,11 @@ exports.create = async ( req, res ) => {
 			);
 		});
 };
-exports.findAll = async (req, res) => {
+exports.findAll = async (req,res) => {
   const name = req.query.name;
   var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
 
-  Clubs.findAll({ where: condition })
+  Clubs.findAll({where:  condition})
     .then(data => {
       res.send(data);
     })
