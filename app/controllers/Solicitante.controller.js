@@ -1,33 +1,55 @@
 const db = require("./../models");
 const Solicitante = db.Solicitate;
+const Login = db.Login;
 
-exports.create = async (req, res) => {
-  const solicitante = {
-    Username: req.body.Username,
-    address: req.body.address,
-    phone: req.body.phone,
-    RFC: req.body.RFC,
-    CURP: req.body.CURP,
-    zipCode: req.body.zipCode,
-    country: req.body.country,
-    email: req.body.email,
-    licenseFishing: req.body.licenseFishing,
-    Originstate: req.body.Originstate,
-    fishing: req.body.fishing,
-    status: "PENDING",
-    clubName: req.body.clubName,
-  };
+exports.create = async (req, res, next) => {
+  try {
+    const solicitante = {
+      Username: req.body.Username,
+      address: req.body.address,
+      phone: req.body.phone,
+      RFC: req.body.RFC,
+      CURP: req.body.CURP,
+      zipCode: req.body.zipCode,
+      country: req.body.country,
+      email: req.body.email,
+      licenseFishing: req.body.licenseFishing,
+      Originstate: req.body.Originstate,
+      fishing: req.body.fishing,
+      status: "PENDING",
+      clubName: req.body.clubName,
+    };
+    const login = {
+      email: req.body.email,
+      password: req.body.password,
+      role: "USER",
+    };
 
-  Solicitante.create(solicitante)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || " Some erros ocurred while creating Solicitante",
+    //Create Login
+    const Log = await Login.create(login)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || "Hubo un error al registrarte",
+        });
       });
-    });
+
+    //Create User
+    await Solicitante.create(solicitante)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || " Some erros ocurred while creating Solicitante",
+        });
+      });
+  } catch (error) {
+    console.log(error);
+  }
 };
 exports.findAll = async (req, res) => {
   const email = req.query.email;

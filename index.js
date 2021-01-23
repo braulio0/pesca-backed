@@ -5,6 +5,7 @@ const db = require('./app/models')
 const solicitante = require('./app/routers/Solicitantes.router.js');
 const clubs = require('./app/routers/Clubs.router.js');
 const office = require('./app/routers/Office.router.js')
+const login = require('./app/routers/Login.router.js')
 const app = express();
 
 
@@ -27,6 +28,7 @@ db.sequelize.sync();
 app.use('/solicitante', solicitante);
 app.use('/clubs', clubs);
 app.use('/office', office );
+app.use('/Login',login);
 //simple route
 app.get('/', (req, res) => {
 

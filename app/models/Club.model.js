@@ -1,27 +1,27 @@
-module.exports = ( sequelize, Sequelize ) => {
+module.exports = (sequelize, Sequelize) => {
   const Club = sequelize.define("club", {
-    name:{
-      type : Sequelize.STRING,
-      primaryKey: true, 
+    name: {
+      type: Sequelize.STRING,
+      primaryKey: true,
     },
-    address:{
+    address: {
       type: Sequelize.STRING,
     },
-    phone:{
+    phone: {
       type: Sequelize.STRING,
     },
-    zipCode:{
+    zipCode: {
       type: Sequelize.STRING,
     },
-    state:{
+    state: {
       type: Sequelize.STRING,
     },
-    districts:{
+    districts: {
       type: Sequelize.STRING,
     },
-    businessHours:{
+    businessHours: {
       type: Sequelize.STRING,
-    }
+    },
   });
   return Club;
 };
