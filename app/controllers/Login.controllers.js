@@ -48,3 +48,27 @@ exports.findOne = async (req, res) => {
     res.status(401).json({ error: "User does not exist" });
   }
 };
+exports.update = async (req, res) => {
+  const email = req.params.email;
+
+  Login.update(req.body, {
+    where: { email: email },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "Solicitante was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update Solicitante with email=${email}. Maybe Solicitante was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating solicitante with email=" + email,
+      });
+    });
+};
+

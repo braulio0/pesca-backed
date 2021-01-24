@@ -1,9 +1,14 @@
+const bcrypt = require('bcrypt');
 const db = require("./../models");
 const Solicitante = db.Solicitate;
 const Login = db.Login;
 
 exports.create = async (req, res, next) => {
+  ;
   try {
+let password = req.body.password;
+  const salt = await bcrypt.genSalt(10);
+  password = await bcrypt.hash(password, salt)
     const solicitante = {
       Username: req.body.Username,
       address: req.body.address,
@@ -21,7 +26,7 @@ exports.create = async (req, res, next) => {
     };
     const login = {
       email: req.body.email,
-      password: req.body.password,
+      password: password,
       role: "USER",
     };
 
