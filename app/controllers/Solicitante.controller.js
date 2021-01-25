@@ -57,10 +57,8 @@ let password = req.body.password;
   }
 };
 exports.findAll = async (req, res) => {
-  const email = req.query.email;
-  var condition = email ? { name: { [Op.iLike]: `%${email}%` } } : null;
-
-  Solicitante.findAll({ where: condition })
+  
+  Solicitante.findAll({ where: {status:req.params.status} })
     .then((data) => {
       res.send(data);
     })
@@ -73,8 +71,7 @@ exports.findAll = async (req, res) => {
 };
 
 exports.findOne = async (req, res) => {
-  const email = req.params.email;
-
+  const email = req.params.email
   Solicitante.findOne({ where: { email: email } })
     .then((data) => {
       res.send(data);
