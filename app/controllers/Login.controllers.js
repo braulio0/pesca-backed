@@ -48,6 +48,7 @@ exports.findOne = async (req, res) => {
     res.status(401).json({ error: "User does not exist" });
   }
 };
+
 exports.update = async (req, res) => {
   const email = req.params.email;
 

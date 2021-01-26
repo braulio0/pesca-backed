@@ -1,14 +1,13 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const db = require("./../models");
 const Solicitante = db.Solicitate;
 const Login = db.Login;
 
 exports.create = async (req, res, next) => {
-  ;
   try {
-let password = req.body.password;
-  const salt = await bcrypt.genSalt(10);
-  password = await bcrypt.hash(password, salt)
+    let password = req.body.password;
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
     const solicitante = {
       Username: req.body.Username,
       address: req.body.address,
@@ -17,6 +16,7 @@ let password = req.body.password;
       CURP: req.body.CURP,
       zipCode: req.body.zipCode,
       country: req.body.country,
+      SolicitateEmail: req.body.email,
       email: req.body.email,
       licenseFishing: req.body.licenseFishing,
       Originstate: req.body.Originstate,
@@ -57,8 +57,7 @@ let password = req.body.password;
   }
 };
 exports.findAll = async (req, res) => {
-  
-  Solicitante.findAll({ where: {status:req.params.status} })
+  Solicitante.findAll({ where: { status: req.params.status } })
     .then((data) => {
       res.send(data);
     })
@@ -71,7 +70,7 @@ exports.findAll = async (req, res) => {
 };
 
 exports.findOne = async (req, res) => {
-  const email = req.params.email
+  const email = req.params.email;
   Solicitante.findOne({ where: { email: email } })
     .then((data) => {
       res.send(data);
